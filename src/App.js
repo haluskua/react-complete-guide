@@ -7,10 +7,11 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Hi, I am a React App</h1>
-        <Person />
-        <Person />
-        <Person />
-
+        <Person name="Max" age="24" />
+        <Person name="Manu" age="25">
+          My Hobbies: Racing
+        </Person>
+        <Person name="Stephanie" age="20" />
       </div>
     );
     // return React.createElement("div", null, "h1", "Hi, I'm a React!!");
