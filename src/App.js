@@ -1,43 +1,33 @@
-import React, { useState } from "react";
+import React, { Component } from "react";
 import "./App.css";
 import Person from "./Person/Person";
 
-// class App extends Component {
-//   state = {
-//     persons: [
-//       {
-//         name: 'Max', age: 28
-//       },
-//       {
-//         name: 'Manu', age: 29
-//       },
-//       {
-//         name: 'Stephanie', age: 26
-//       }
-//     ],
-//   othersState: 'some other value'
-
-//   }
-
-const app = props => {
-  const [personsState, setPersonsState] = useState({
+class App extends Component {
+  state = {
     persons: [
-      { name: "Max", age: 28 },
-      { name: "Manu", age: 29 },
-      { name: "Stephanie", age: 20 }
+      {
+        name: 'Max', age: 28 
+      },
+      {
+        name: 'Manu', age: 29
+      },
+      {
+        name: 'Stephanie', age: 26
+      }
     ],
-  });
+  othersState: 'some other value'
 
- const [otherState, setOtherState] = useState('some other state')
 
-  console.log(personsState, otherState);
+  }
 
-  const switchNameHandler = () => {
-    setPersonsState({
+  switchNameHandler =(newName)=> {
+    //DON'T DO THIS: this.state.persons[0].name = 'Maximilian';
+
+    this.setState({
       persons: [
         { name: newName, age: 28 },
         { name: 'Manu', age: 29 }, 
-        { name: 'Stephanie', age: 27 } 
+        { name: 'Stephanie', age: 27 }
       ]
     })
   }
@@ -68,4 +58,4 @@ const app = props => {
   }
 }
 
-export default app;
+export default App;
