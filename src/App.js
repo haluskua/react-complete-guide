@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import "./Person/Person";
+import Radium from 'radium';
 import Person from "./Person/Person";
 import { join } from "path";
 
@@ -66,7 +67,11 @@ class App extends Component {
       width: "200px",
       border: "1px solid yellowgreen",
       padding: "8px",
-      cursor: "pointer"
+      cursor: "pointer",
+      ':hover': {
+        backgroundColor: 'lightgreen',
+        color: 'black'
+      }
     };
     let persons = null;
 
@@ -88,6 +93,11 @@ class App extends Component {
       );
       style.backgroundColor = 'red';
       style.border = '1px solid black';
+          // using the Radium feature
+      style[':hover'] = {
+        backgroundColor: 'salmon',
+        color: 'black'
+      }
     }
     // let classes = ['red', "bold"].join(' ');
     const classes = [];
@@ -118,4 +128,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Radium(App);
