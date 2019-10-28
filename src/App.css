@@ -3,4 +3,12 @@
   display: flex;
   flex-direction: column;
   text-align: center;
+  align-items: center;
+  background-color: green-yellow;
+
+}
+
+.App, div {
+  display: flex;
+  justify-content: center;
 }

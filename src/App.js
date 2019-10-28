@@ -26,17 +26,29 @@ class App extends Component {
     showPersons: false
   };
 
-  nameChangeHandler = event => {
-    this.setState({
-      person: [
-        { name: "Max", age: 28 },
-        { name: event.target.value, age: 29 },
-        { name: "Stephanie", age: 26 }
-      ]
+  nameChangeHandler =(event, id) => {
+    const personIndex = this.state.persons.findIndex(p => {
+      return p.id === id;
     });
+
+    const person = {
+      ...this.state.persons[personIndex]
+    };
+
+    //alternative 
+    // const person = Object.assign({}, this.state.persons[personIndex]);
+
+    person.name = event.target.value;
+
+    const persons = [...this.state.persons];
+    persons[personIndex] = person;
+
+    this.setState( { persons: persons } );
   };
+
   deletePersonHandler = personIndex => {
-    const persons = this.state.persons;
+    // const persons = this.state.persons.slice();
+    const persons = [...this.state.persons];
     persons.splice(personIndex, 1);
     this.setState({ persons: persons });
   };
@@ -66,6 +78,7 @@ class App extends Component {
                 name={person.name}
                 age={person.age}
                 key={person.id}
+                changed={(event)=> this.nameChangeHandler(event, person.id)}
               />
             );
           })}
@@ -74,7 +87,7 @@ class App extends Component {
     }
     return (
       <div className="App">
-        <h1>Hi, I am a React App</h1>
+        <h1>Hi, I am a new React App</h1>
         <button style={style} onClick={this.togglePersonsHandler}>
           Toggle Person{" "}
         </button>
