@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./App.css";
+import classes from "./App.css";
 import "./Person/Person";
 import Person from "./Person/Person";
 // eslint-disable-next-line
@@ -93,18 +93,18 @@ class App extends Component {
 
     }
     // let classes = ['red', "bold"].join(' ');
-    const classes = [];
+    const assignedClasses = [];
     if (this.state.persons.length <= 2) {
-      classes.push('red') //  classses = ['red']
+      assignedClasses.push(classes.red) //  classses = ['red']
     }
     if (this.state.persons.length <= 1){
-      classes.push('bold') // classes = ['red, 'bold']
+      assignedClasses.push(classes.bold) // classes = ['red, 'bold']
     }
 
     return (
-      <div className="App">
+      <div className={classes.App}>
         <h1>Hi, I am a new React App</h1>
-        <p className={classes.join (' ')}>This is really working</p>
+        <p className={assignedClasses.join (' ')}>This is really working</p>
         <button style={style} 
           onClick={this.togglePersonsHandler}>
           Toggle Person{" "}
