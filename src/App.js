@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
 import "./Person/Person";
-import Radium, {StyleRoot} from 'radium';
 import Person from "./Person/Person";
 // eslint-disable-next-line
 import { join } from "path";
@@ -69,11 +68,8 @@ class App extends Component {
       border: "1px solid yellowgreen",
       padding: "8px",
       cursor: "pointer",
-      ':hover': {
-        backgroundColor: 'lightgreen',
-        color: 'black'
-      }
     };
+
     let persons = null;
 
     if (this.state.showPersons) {
@@ -110,18 +106,16 @@ class App extends Component {
     }
 
     return (
-      <StyleRoot>
-        <div className="App">
-          <h1>Hi, I am a new React App</h1>
-          <p className={classes.join (' ')}>This is really working</p>
-          <button style={style} 
-            onClick={this.togglePersonsHandler}>
-            Toggle Person{" "}
-          </button>
-          {persons}
-        </div>
-      </StyleRoot>
-    );
+      <div className="App">
+        <h1>Hi, I am a new React App</h1>
+        <p className={classes.join (' ')}>This is really working</p>
+        <button style={style} 
+          onClick={this.togglePersonsHandler}>
+          Toggle Person{" "}
+        </button>
+        {persons}
+      </div>
+  );
     // return React.createElement("div", null, "h1", "Hi, I'm a React!!");
     // return React.createElement(
     //   "div",
@@ -131,4 +125,4 @@ class App extends Component {
   }
 }
 
-export default Radium(App);
+export default App;
