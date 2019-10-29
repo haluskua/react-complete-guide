@@ -90,11 +90,7 @@ class App extends Component {
       );
       style.backgroundColor = 'red';
       style.border = '1px solid black';
-          // using the Radium feature
-      style[':hover'] = {
-        backgroundColor: 'salmon',
-        color: 'black'
-      }
+
     }
     // let classes = ['red', "bold"].join(' ');
     const classes = [];
