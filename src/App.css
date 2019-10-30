@@ -20,3 +20,28 @@
   display: flex;
   justify-content: center;
 }
+
+.App button {
+  color: white;
+  font: inherit;
+  width: 200px;
+  border: 1px yellowgreen;
+  padding: 8px;
+  cursor: pointer;
+  border-radius: 3px;
+  background-color: green;
+}
+
+.App button:hover {
+  background-color: yellow;
+  color: black;
+}
+
+.App button.Red {
+  background-Color: red;
+}
+
+.App button.Red:hover {
+  background-color: salmon;
+  color: black;
+}

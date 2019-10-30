@@ -60,17 +60,8 @@ class App extends Component {
     this.setState({ showPersons: !doesShow });
   };
   render() {
-    const style = {
-      backgroundColor: "green",
-      color: 'white',
-      font: "inherit",
-      width: "200px",
-      border: "1px solid yellowgreen",
-      padding: "8px",
-      cursor: "pointer",
-    };
-
     let persons = null;
+    let btnClass = "";
 
     if (this.state.showPersons) {
       persons = (
@@ -87,9 +78,10 @@ class App extends Component {
             );
           })}
         </div>
+
       );
-      style.backgroundColor = 'red';
-      style.border = '1px solid black';
+      //created by Cssloader
+      btnClass = classes.Red;
 
     }
     // let classes = ['red', "bold"].join(' ');
@@ -105,7 +97,7 @@ class App extends Component {
       <div className={classes.App}>
         <h1>Hi, I am a new React App</h1>
         <p className={assignedClasses.join (' ')}>This is really working</p>
-        <button style={style} 
+        <button className={btnClass}
           onClick={this.togglePersonsHandler}>
           Toggle Person{" "}
         </button>
