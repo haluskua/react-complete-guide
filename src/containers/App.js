@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import classes from "./App.css";
-import ErrorBoundary from './ErrorBoundary/ErrorBoundary'
-import "./Person/Person";
-import Person from "./Person/Person";
+import "../components/Persons/Person/Person";
+import Person from "../components/Persons/Person/Person";
 // eslint-disable-next-line
 import { join } from "path";
 
@@ -69,14 +68,15 @@ class App extends Component {
         <React.Fragment>
           <div className={classes.column}>
             {this.state.persons.map((person, index) => {
-              return <ErrorBoundary key={person.id}>
+              return (
                   <Person
                   click={() => this.deletePersonHandler(index)}
                   name={person.name}
                   age={person.age}
                   changed={event => this.nameChangeHandler(event, person.id)}
+                  key={person.id}
                 />
-                </ErrorBoundary>
+              );
             } )}
           </div>
         </React.Fragment>
