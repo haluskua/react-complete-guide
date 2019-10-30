@@ -31,6 +31,10 @@
   border-radius: 3px;
   background-color: green;
 }
+.column {
+  display: flex;
+  flex-direction: column;
+}
 
 .App button:hover {
   background-color: yellow;
