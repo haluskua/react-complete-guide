@@ -1,0 +1,51 @@
+.Cockpit {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    /* background-color: rgb(153, 187, 86); */
+  
+  }
+  
+  
+  .red {
+    color: red;
+  }
+  
+  .bold {
+    font-weight: bold;
+  }
+  .Cockpit, div {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .Cockpit button {
+    color: white;
+    font: inherit;
+    width: 200px;
+    border: 1px yellowgreen;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 3px;
+    background-color: green;
+  }
+  .column {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .Cockpit button:hover {
+    background-color: yellow;
+    color: black;
+  }
+  
+  .Cockpit button.Red {
+    background-Color: red;
+  }
+  
+  .Cockpit button.Red:hover {
+    background-color: salmon;
+    color: black;
+  }
