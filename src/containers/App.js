@@ -2,10 +2,7 @@ import React, { Component } from "react";
 import classes from "./App.css";
 import Cockpit from '../components/Cockpit/Cockpit';
 import "../components/Persons/Person/Person";
-// import Person from "../components/Persons/Person/Person";
 import Persons from "../components/Persons/Persons"
-// eslint-disable-next-line
-import { join } from "path";
 
 class App extends Component {
   state = {
@@ -76,6 +73,7 @@ class App extends Component {
       <React.Fragment>
         <div className={classes.App}>
           <Cockpit 
+            title={this.props.appTitle}
             showPersons={this.state.showPersons} 
             persons={this.state.persons}
             clicked={this.togglePersonsHandler}
