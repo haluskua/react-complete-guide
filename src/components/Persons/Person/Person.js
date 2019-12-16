@@ -14,20 +14,40 @@
 
 // }
 
-import React from 'react';
-import classes from './Person.css'
+import React, { Component } from "react";
+import classes from "./Person.css";
+import Auxiliary from "../../../hoc/Auxiliary";
 
-const person = ( props ) => {
-    console.log('[Person.js] rendering ...')
+class person extends Component {
+  render() {
+    console.log("[Person.js] rendering ...");
+    // return [
+    //   <p key="i1" onClick={this.rops.click}>
+    //     I am {this.props.name} and I am {this.props.age} years olds!{" "}
+    //   </p>,
+    //   <p key="i2">{this.props.children}</p>,
+    //   <input
+    //     key="i3"
+    //     type="text"
+    //     onChange={this.props.changed}
+    //     value={this.props.name}
+    //   />
+    // ];
     return (
-    <div className={classes.Person}>
-        <p onClick={props.click}>I am {props.name} and I am {props.age} years olds! </p>
-        <p>{props.children}</p>
-        <input type="text" onChange={props.changed} value={props.name}/>
-    </div>
-
-    )
+      <Auxiliary>
+        <p key="i1" onClick={this.props.click}>
+          I am {this.props.name} and I am {this.props.age} years olds!{" "}
+        </p>
+        ,<p key="i2">{this.props.children}</p>,
+        <input
+          key="i3"
+          type="text"
+          onChange={this.props.changed}
+          value={this.props.name}
+        />
+      </Auxiliary>
+    );
+  }
 }
-
 
 export default person;
