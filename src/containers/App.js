@@ -3,6 +3,7 @@ import classes from "./App.css";
 import Cockpit from '../components/Cockpit/Cockpit';
 import "../components/Persons/Person/Person";
 import Persons from "../components/Persons/Persons"
+import WithClass from '../hoc/WithClass';
 
 class App extends Component {
 
@@ -87,8 +88,7 @@ class App extends Component {
     }
 
     return (
-      <React.Fragment>
-        <div className={classes.App}>
+        <WithClass classes={classes.App}>
           <Cockpit 
             title={this.props.appTitle}
             showPersons={this.state.showPersons} 
@@ -96,8 +96,7 @@ class App extends Component {
             clicked={this.togglePersonsHandler}
             />;
           {persons}
-        </div>
-      </React.Fragment>
+        </WithClass>
   );
     // return React.createElement("div", null, "h1", "Hi, I'm a React!!");
     // return React.createElement(
