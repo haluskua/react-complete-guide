@@ -16,16 +16,6 @@
 
 import React, { Component } from "react";
 import classes from "./Person.css";
-<<<<<<< HEAD
-import Aux from "../../../containers/hoc/Auxilary";
-
-class Person extends Component {
-  render() {
-    console.log("[Person.js] rendering ...");
-    return (
-      <Aux>
-        <p onClick={this.props.click}>
-=======
 import Auxiliary from "../../../hoc/Auxiliary";
 
 class person extends Component {
@@ -46,7 +36,6 @@ class person extends Component {
     return (
       <Auxiliary>
         <p key="i1" onClick={this.props.click}>
->>>>>>> master
           I am {this.props.name} and I am {this.props.age} years olds!{" "}
         </p>
         ,<p key="i2">{this.props.children}</p>,
@@ -56,17 +45,9 @@ class person extends Component {
           onChange={this.props.changed}
           value={this.props.name}
         />
-<<<<<<< HEAD
-      </Aux>
-=======
       </Auxiliary>
->>>>>>> master
     );
   }
 }
 
-<<<<<<< HEAD
-export default Person;
-=======
 export default person;
->>>>>>> master
