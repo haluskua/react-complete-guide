@@ -1,15 +1,14 @@
 import React, { Component } from "react";
 import classes from "./App.css";
-import Cockpit from '../components/Cockpit/Cockpit';
+import Cockpit from "../components/Cockpit/Cockpit";
 import "../components/Persons/Person/Person";
-import Persons from "../components/Persons/Persons"
-import WithClass from '../hoc/WithClass';
+import Persons from "../components/Persons/Persons";
+import WithClass from "../hoc/WithClass";
 
 class App extends Component {
-
   constructor(props) {
     super(props);
-    console.log('[App.js] constructor');
+    console.log("[App.js] constructor");
   }
 
   state = {
@@ -31,16 +30,30 @@ class App extends Component {
       }
     ],
     othersState: "some other value",
-    showPersons: false
-  }
+    showPersons: false,
+    showCockpit: true
+  };
 
   static getDerivedStateFromProps(props, state) {
-    console.log('[App.js] getDerivedStateFromProps', props);
+    console.log("[App.js] getDerivedStateFromProps", props);
     return state;
   }
 
+  //componentWillMount() {
+  //console.log('[App.js] componentWillMount');
+  //}
+
   componentDidMount() {
-    console.log('[App.js] ComponentDidMount');
+    console.log("[App.js] ComponentDidMount");
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log("[App.js] shouldComponentUpdate");
+    return true;
+  }
+
+  componentDidUpdate() {
+    console.log("[App.js] componentDidUpdate");
   }
 
   nameChangeHandler = (event, id) => {
@@ -76,28 +89,39 @@ class App extends Component {
   };
 
   render() {
-    console.log('[App.js] render');
+    console.log("[App.js] render");
     let persons = null;
 
     if (this.state.showPersons) {
-      persons = <Persons 
-                  persons={this.state.persons}
-                  clicked={this.deletePersonHandler} 
-                  changed={this.nameChangeHandler} 
-                  />     
+      persons = (
+        <Persons
+          persons={this.state.persons}
+          clicked={this.deletePersonHandler}
+          changed={this.nameChangeHandler}
+        />
+      );
     }
 
     return (
-        <WithClass classes={classes.App}>
-          <Cockpit 
+      <WithClass classes={classes.App}>
+        <button
+          onClick={() => {
+            this.setState({ showCockpit: false });
+          }}
+        >
+          Remove Cockpit
+        </button>
+        {this.state.showCockpit ? (
+          <Cockpit
             title={this.props.appTitle}
-            showPersons={this.state.showPersons} 
+            showPersons={this.state.showPersons}
             persons={this.state.persons}
             clicked={this.togglePersonsHandler}
-            />;
-          {persons}
-        </WithClass>
-  );
+          />
+        ) : null}
+        ;{persons}
+      </WithClass>
+    );
     // return React.createElement("div", null, "h1", "Hi, I'm a React!!");
     // return React.createElement(
     //   "div",

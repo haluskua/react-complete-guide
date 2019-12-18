@@ -18,7 +18,7 @@ import React, { Component } from "react";
 import classes from "./Person.css";
 import Auxiliary from "../../../hoc/Auxiliary";
 
-class person extends Component {
+class Person extends Component {
   render() {
     console.log("[Person.js] rendering ...");
     // return [
@@ -28,26 +28,40 @@ class person extends Component {
     //   <p key="i2">{this.props.children}</p>,
     //   <input
     //     key="i3"
-    //     type="text"
+    //     type="text"]
     //     onChange={this.props.changed}
     //     value={this.props.name}
     //   />
     // ];
+    // return (
+    //   <Auxiliary>
+    //     <p key="i1" onClick={this.props.click}>
+    //       I am {this.props.name} and I am {this.props.age} years olds!{" "}
+    //     </p>
+    //     <p key="i2">{this.props.children}</p>
+    //     <input
+    //       key="i3"
+    //       type="text"
+    //       onChange={this.props.changed}
+    //       value={this.props.name}
+    //     />
+    //   </Auxiliary>
+    // );
     return (
-      <Auxiliary>
+      <React.Fragment>
         <p key="i1" onClick={this.props.click}>
           I am {this.props.name} and I am {this.props.age} years olds!{" "}
         </p>
-        ,<p key="i2">{this.props.children}</p>,
+        <p key="i2">{this.props.children}</p>
         <input
           key="i3"
           type="text"
           onChange={this.props.changed}
           value={this.props.name}
         />
-      </Auxiliary>
+      </React.Fragment>
     );
   }
 }
 
-export default person;
+export default Person;
