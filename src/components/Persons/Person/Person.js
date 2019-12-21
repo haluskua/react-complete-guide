@@ -27,8 +27,10 @@ class Person extends Component {
     super(props);
     this.inputElementRef = React.createRef();
   }
+  static contextType =authContext;
   componentDidMount() {
     this.inputElementRef.current.focus();
+    console.log(this.context.authenticated);
     // not related to React App so not the optimal way so use id
     // document.querySelector("input").focus();
     // this.inputElement.focus();
@@ -39,11 +41,9 @@ class Person extends Component {
 
     return (
       <Auxiliary>
-        <authContext.Consumer>
-        {context => 
-        context.authenticated ? <p>Authenciated!</p>: <p>Please log in</p>
-        }
-        </authContext.Consumer>
+
+        {this.context.authenticated ? <p>Authenciated!</p>: <p>Please log in</p>}
+
         <p key="i1" onClick={this.props.click}>
           I am {this.props.name} and I am {this.props.age} years olds!{" "}
         </p>
