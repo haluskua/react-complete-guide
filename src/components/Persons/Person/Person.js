@@ -16,84 +16,32 @@
 
 import React, { Component } from "react";
 import classes from "./Person.css";
-import Auxiliary from "../../../hoc/Auxiliary";
-import withClass from "../../../hoc/WithClass";
-import PropTypes from "prop-types";
-import authContext from "../../../context/auth-context";
 
 
 class Person extends Component {
   constructor(props) {
     super(props);
-    this.inputElementRef = React.createRef();
+    console.log("[Person.js] Inside Constructor", props);
   }
-  static contextType =authContext;
+
+  componentWillMount() {
+    console.log('[Person.js] Inside componentWillMount');
+  }
+
   componentDidMount() {
-    this.inputElementRef.current.focus();
-    console.log(this.context.authenticated);
-    // not related to React App so not the optimal way so use id
-    // document.querySelector("input").focus();
-    // this.inputElement.focus();
+    console.log('[Person.js] Inside componentDidMount');
   }
 
   render() {
-    console.log("[Person.js] rendering ...");
-
+    console.log('[Person.js] Inside render');
     return (
-      <Auxiliary>
-
-        {this.context.authenticated ? <p>Authenciated!</p>: <p>Please log in</p>}
-
-        <p key="i1" onClick={this.props.click}>
-          I am {this.props.name} and I am {this.props.age} years olds!{" "}
-        </p>
-        <p key="i2">{this.props.children}</p>
-        <input
-          key="i3"
-          // ref={inputEl => {
-          //   this.inputElement = inputEl;
-          // }}
-          ref={this.inputElementRef}
-          type="text"
-          onChange={this.props.changed}
-          value={this.props.name}
-        />
-      </Auxiliary>
-    );
+      <div className={classes.Person}>
+        <p onClick={this.props.click}> I'm {this.props.name} and I am {this.props.age} year old!</p>
+        <p> {this.props.children}</p>
+        <input type="text" onChange={this.props.changed} value={this.props.name} />
+      </div>
+    )
   }
-  // return [
-  //   <p key="i1" onClick={this.rops.click}>
-  //     I am {this.props.name} and I am {this.props.age} years olds!{" "}
-  //   </p>,
-  //   <p key="i2">{this.props.children}</p>,
-  //   <input
-  //     key="i3"
-  //     type="text"]
-  //     onChange={this.props.changed}
-  //     value={this.props.name}
-  //   />
-  // ];
-  // return (
-  //   <Auxiliary>
-  //     <p key="i1" onClick={this.props.click}>
-  //       I am {this.props.name} and I am {this.props.age} years olds!{" "}
-  //     </p>
-  //     <p key="i2">{this.props.children}</p>
-  //     <input
-  //       key="i3"
-  //       type="text"
-  //       onChange={this.props.changed}
-  //       value={this.props.name}
-  //     />
-  //   </Auxiliary>
-  // );
 }
-//when distribution to other developers or when working in large group or projects
-Person.proptTypes = {
-  click: PropTypes.func,
-  name: PropTypes.string,
-  age: PropTypes.number,
-  changed: PropTypes.func
-};
 
-export default withClass(Person, classes.Person);
+export default Person;

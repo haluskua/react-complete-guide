@@ -10,7 +10,7 @@ import { join } from "path";
 class App extends Component {
   constructor(props) {
     super(props);
-    console.log("[App.js] constructor");
+    console.log("[App.js] Inside Constructor", props);
   }
 
   state = {
@@ -38,27 +38,14 @@ class App extends Component {
     authenticated: false
   };
 
-  static getDerivedStateFromProps(props, state) {
-    console.log("[App.js] getDerivedStateFromProps", props);
-    return state;
+  componentWillMount() {
+  console.log('[App.js] Inside componentWillMount');
   }
-
-  //componentWillMount() {
-  //console.log('[App.js] componentWillMount');
-  //}
 
   componentDidMount() {
-    console.log("[App.js] ComponentDidMount");
+    console.log('[App.js] Inside componentDidMount');
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    console.log("[App.js] shouldComponentUpdate");
-    return true;
-  }
-
-  componentDidUpdate() {
-    console.log("[App.js] componentDidUpdate");
-  }
 
   nameChangeHandler = (event, id) => {
     const personIndex = this.state.persons.findIndex(p => {
@@ -100,11 +87,8 @@ class App extends Component {
     this.setState({ showPersons: !doesShow });
   };
 
-
-
-
   render() {
-    console.log("[App.js] render");
+    console.log("[App.js] Inside render");
     let persons = null;
 
     if (this.state.showPersons) {
@@ -112,16 +96,14 @@ class App extends Component {
         persons={this.state.persons}
         clicked={this.deletePersonHandler}
         changed={this.nameChangeHandler}
-      />
+      />;
 
     }
-
-
     return (
       <div className={classes.App}>
         <Cockpit
-          appTitle={this.props.title}
           showPersons={this.state.showPersons}
+          appTitle={this.props.title}
           persons={this.state.persons}
           clicked={this.togglePersonsHandler} />
         {persons}
