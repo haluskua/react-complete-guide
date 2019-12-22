@@ -39,13 +39,36 @@ class App extends Component {
   };
 
   componentWillMount() {
-  console.log('[App.js] Inside componentWillMount');
+    console.log('[App.js] Inside componentWillMount');
   }
 
   componentDidMount() {
     console.log('[App.js] Inside componentDidMount');
   }
 
+  // LEGACY UPDATE CYCLE
+  componentWillReceiveProps(nextProps) {
+    console.log('[UPDATE App.js] Inside componentWillReceiveProps', nextProps);
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('[UPDATE App.js] Inside shouldComponentUpdate', nextProps, nextState);
+    // might have cases not update certain component by returning false
+    // return nextProps.persons !== this.props.persons;
+    return true;
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    console.log('[UPDATE.App.js] Inside componentWillUpdate', nextProps, nextState);
+  }
+
+  componentDidUpdate() {
+    console.log('[UPDATE.App.js] Inside componenentDidUpdate');
+  }
+
+
+
+  // HandlerFunctions
 
   nameChangeHandler = (event, id) => {
     const personIndex = this.state.persons.findIndex(p => {
