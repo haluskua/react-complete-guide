@@ -3,9 +3,11 @@ import React, { PureComponent } from "react";
 import classes from "./App.css";
 import Persons from "../components/Persons/Persons";
 import Cockpit from "../components/Cockpit/Cockpit";
+import WithClass from "../hoc/WithClass";
 
 // eslint-disable-next-line
 import { join } from "path";
+import withClass from "../hoc/WithClass";
 
 class App extends PureComponent {
   constructor(props) {
@@ -124,7 +126,7 @@ class App extends PureComponent {
 
     }
     return (
-      <div className={classes.App}>
+      <WithClass classes={classes.App}>
         <button onClick={() => { this.setState({ showPersons: true }) }}> SHOW PERSONS</button>
         <Cockpit
           showPersons={this.state.showPersons}
@@ -132,7 +134,7 @@ class App extends PureComponent {
           persons={this.state.persons}
           clicked={this.togglePersonsHandler} />
         {persons}
-      </div>
+      </WithClass>
     );
     // return React.createElement("div", null, "h1", "Hi, I'm a React!!");
     // return React.createElement(
