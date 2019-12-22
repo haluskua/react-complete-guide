@@ -16,57 +16,84 @@
 
 import React, { Component } from "react";
 import classes from "./Person.css";
-<<<<<<< HEAD
-import Aux from "../../../containers/hoc/Auxilary";
+import Auxiliary from "../../../hoc/Auxiliary";
+import withClass from "../../../hoc/WithClass";
+import PropTypes from "prop-types";
+import authContext from "../../../context/auth-context";
+
 
 class Person extends Component {
-  render() {
-    console.log("[Person.js] rendering ...");
-    return (
-      <Aux>
-        <p onClick={this.props.click}>
-=======
-import Auxiliary from "../../../hoc/Auxiliary";
+  constructor(props) {
+    super(props);
+    this.inputElementRef = React.createRef();
+  }
+  static contextType =authContext;
+  componentDidMount() {
+    this.inputElementRef.current.focus();
+    console.log(this.context.authenticated);
+    // not related to React App so not the optimal way so use id
+    // document.querySelector("input").focus();
+    // this.inputElement.focus();
+  }
 
-class person extends Component {
   render() {
     console.log("[Person.js] rendering ...");
-    // return [
-    //   <p key="i1" onClick={this.rops.click}>
-    //     I am {this.props.name} and I am {this.props.age} years olds!{" "}
-    //   </p>,
-    //   <p key="i2">{this.props.children}</p>,
-    //   <input
-    //     key="i3"
-    //     type="text"
-    //     onChange={this.props.changed}
-    //     value={this.props.name}
-    //   />
-    // ];
+
     return (
       <Auxiliary>
+
+        {this.context.authenticated ? <p>Authenciated!</p>: <p>Please log in</p>}
+
         <p key="i1" onClick={this.props.click}>
->>>>>>> master
           I am {this.props.name} and I am {this.props.age} years olds!{" "}
         </p>
-        ,<p key="i2">{this.props.children}</p>,
+        <p key="i2">{this.props.children}</p>
         <input
           key="i3"
+          // ref={inputEl => {
+          //   this.inputElement = inputEl;
+          // }}
+          ref={this.inputElementRef}
           type="text"
           onChange={this.props.changed}
           value={this.props.name}
         />
-<<<<<<< HEAD
-      </Aux>
-=======
       </Auxiliary>
->>>>>>> master
     );
   }
+  // return [
+  //   <p key="i1" onClick={this.rops.click}>
+  //     I am {this.props.name} and I am {this.props.age} years olds!{" "}
+  //   </p>,
+  //   <p key="i2">{this.props.children}</p>,
+  //   <input
+  //     key="i3"
+  //     type="text"]
+  //     onChange={this.props.changed}
+  //     value={this.props.name}
+  //   />
+  // ];
+  // return (
+  //   <Auxiliary>
+  //     <p key="i1" onClick={this.props.click}>
+  //       I am {this.props.name} and I am {this.props.age} years olds!{" "}
+  //     </p>
+  //     <p key="i2">{this.props.children}</p>
+  //     <input
+  //       key="i3"
+  //       type="text"
+  //       onChange={this.props.changed}
+  //       value={this.props.name}
+  //     />
+  //   </Auxiliary>
+  // );
 }
+//when distribution to other developers or when working in large group or projects
+Person.proptTypes = {
+  click: PropTypes.func,
+  name: PropTypes.string,
+  age: PropTypes.number,
+  changed: PropTypes.func
+};
 
-<<<<<<< HEAD
-export default Person;
-=======
-export default person;
->>>>>>> master
+export default withClass(Person, classes.Person);

@@ -1,14 +1,16 @@
 import React, { Component } from "react";
 import classes from "./App.css";
-import Cockpit from '../components/Cockpit/Cockpit';
+import Cockpit from "../components/Cockpit/Cockpit";
 import "../components/Persons/Person/Person";
-import Persons from "../components/Persons/Persons"
+import Persons from "../components/Persons/Persons";
+import withClass from "../hoc/WithClass";
+import Auxiliary from "../hoc/Auxiliary";
+import AuthContext from "../context/auth-context";
 
 class App extends Component {
-
   constructor(props) {
     super(props);
-    console.log('[App.js] constructor');
+    console.log("[App.js] constructor");
   }
 
   state = {
@@ -30,16 +32,32 @@ class App extends Component {
       }
     ],
     othersState: "some other value",
-    showPersons: false
-  }
+    showPersons: false,
+    showCockpit: true,
+    changeCounter: 0,
+    authenticated: false
+  };
 
   static getDerivedStateFromProps(props, state) {
-    console.log('[App.js] getDerivedStateFromProps', props);
+    console.log("[App.js] getDerivedStateFromProps", props);
     return state;
   }
 
+  //componentWillMount() {
+  //console.log('[App.js] componentWillMount');
+  //}
+
   componentDidMount() {
-    console.log('[App.js] ComponentDidMount');
+    console.log("[App.js] ComponentDidMount");
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log("[App.js] shouldComponentUpdate");
+    return true;
+  }
+
+  componentDidUpdate() {
+    console.log("[App.js] componentDidUpdate");
   }
 
   nameChangeHandler = (event, id) => {
@@ -59,7 +77,15 @@ class App extends Component {
     const persons = [...this.state.persons];
     persons[personIndex] = person;
 
-    this.setState({ persons: persons });
+    // this.setState({ persons: persons });
+    // Best practice for state updates that depend on the old/prev state
+
+    this.setState((prevState, props) => {
+      return {
+        persons: persons,
+        changeCounter: prevState.changeCounter + 1
+      };
+    });
   };
 
   deletePersonHandler = personIndex => {
@@ -74,31 +100,53 @@ class App extends Component {
     this.setState({ showPersons: !doesShow });
   };
 
+  loginHandler = () => {
+    this.setState({ authenticated: true });
+  };
+
   render() {
-    console.log('[App.js] render');
+    console.log("[App.js] render");
     let persons = null;
 
     if (this.state.showPersons) {
-      persons = <Persons 
-                  persons={this.state.persons}
-                  clicked={this.deletePersonHandler} 
-                  changed={this.nameChangeHandler} 
-                  />     
+      persons = (
+        <Persons
+          persons={this.state.persons}
+          clicked={this.deletePersonHandler}
+          changed={this.nameChangeHandler}
+          isAuthenticated={this.state.authenticated}
+        />
+      );
     }
 
     return (
-      <React.Fragment>
-        <div className={classes.App}>
-          <Cockpit 
-            title={this.props.appTitle}
-            showPersons={this.state.showPersons} 
-            persons={this.state.persons}
-            clicked={this.togglePersonsHandler}
-            />;
+      <Auxiliary>
+        <button
+          onClick={() => {
+            this.setState({ showCockpit: false });
+          }}
+        >
+          Remove Cockpit
+        </button>
+        <AuthContext.Provider
+          value={{
+            authenticated: this.state.authenticated,
+            login: this.loginHandler
+          }}
+        >
+          {this.state.showCockpit ? (
+            <Cockpit
+              title={this.props.appTitle}
+              showPersons={this.state.showPersons}
+              personsLength={this.state.persons.length}
+              clicked={this.togglePersonsHandler}
+              login={this.loginHandler}
+            />
+          ) : null}
           {persons}
-        </div>
-      </React.Fragment>
-  );
+        </AuthContext.Provider>
+      </Auxiliary>
+    );
     // return React.createElement("div", null, "h1", "Hi, I'm a React!!");
     // return React.createElement(
     //   "div",
@@ -108,4 +156,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withClass(App, classes.App);
