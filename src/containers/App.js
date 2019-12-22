@@ -1,11 +1,11 @@
 import React, { Component } from "react";
+
 import classes from "./App.css";
-import Cockpit from "../components/Cockpit/Cockpit";
-import "../components/Persons/Person/Person";
 import Persons from "../components/Persons/Persons";
-import withClass from "../hoc/WithClass";
-import Auxiliary from "../hoc/Auxiliary";
-import AuthContext from "../context/auth-context";
+import Cockpit from "../components/Cockpit/Cockpit";
+
+// eslint-disable-next-line
+import { join } from "path";
 
 class App extends Component {
   constructor(props) {
@@ -100,52 +100,32 @@ class App extends Component {
     this.setState({ showPersons: !doesShow });
   };
 
-  loginHandler = () => {
-    this.setState({ authenticated: true });
-  };
+
+
 
   render() {
     console.log("[App.js] render");
     let persons = null;
 
     if (this.state.showPersons) {
-      persons = (
-        <Persons
-          persons={this.state.persons}
-          clicked={this.deletePersonHandler}
-          changed={this.nameChangeHandler}
-          isAuthenticated={this.state.authenticated}
-        />
-      );
+      persons = <Persons
+        persons={this.state.persons}
+        clicked={this.deletePersonHandler}
+        changed={this.nameChangeHandler}
+      />
+
     }
 
+
     return (
-      <Auxiliary>
-        <button
-          onClick={() => {
-            this.setState({ showCockpit: false });
-          }}
-        >
-          Remove Cockpit
-        </button>
-        <AuthContext.Provider
-          value={{
-            authenticated: this.state.authenticated,
-            login: this.loginHandler
-          }}
-        >
-          {this.state.showCockpit ? (
-            <Cockpit
-              title={this.props.appTitle}
-              showPersons={this.state.showPersons}
-              personsLength={this.state.persons.length}
-              clicked={this.togglePersonsHandler}
-              login={this.loginHandler}
-            />
-          ) : null}
-          {persons}
-        </AuthContext.Provider>
-      </Auxiliary>
+      <div className={classes.App}>
+        <Cockpit
+          appTitle={this.props.title}
+          showPersons={this.state.showPersons}
+          persons={this.state.persons}
+          clicked={this.togglePersonsHandler} />
+        {persons}
+      </div>
     );
     // return React.createElement("div", null, "h1", "Hi, I'm a React!!");
     // return React.createElement(
@@ -156,4 +136,4 @@ class App extends Component {
   }
 }
 
-export default withClass(App, classes.App);
+export default App;
