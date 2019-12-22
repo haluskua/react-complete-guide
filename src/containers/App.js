@@ -1,7 +1,9 @@
 import React, { Component } from "react";
+
 import classes from "./App.css";
-import "../components/Persons/Person/Person";
-import Person from "../components/Persons/Person/Person";
+import Persons from "../components/Persons/Persons";
+import Cockpit from "../components/Cockpit/Cockpit";
+
 // eslint-disable-next-line
 import { join } from "path";
 
@@ -59,53 +61,33 @@ class App extends Component {
     const doesShow = this.state.showPersons;
     this.setState({ showPersons: !doesShow });
   };
+
+
+
+
   render() {
     let persons = null;
-    let btnClass = "";
 
     if (this.state.showPersons) {
-      persons = (
-        <React.Fragment>
-          <div className={classes.column}>
-            {this.state.persons.map((person, index) => {
-              return (
-                  <Person
-                  click={() => this.deletePersonHandler(index)}
-                  name={person.name}
-                  age={person.age}
-                  changed={event => this.nameChangeHandler(event, person.id)}
-                  key={person.id}
-                />
-              );
-            } )}
-          </div>
-        </React.Fragment>
-
-      );
-      //created by Cssloader
-      btnClass = classes.Red;
+      persons = <Persons
+        persons={this.state.persons}
+        clicked={this.deletePersonHandler}
+        changed={this.nameChangeHandler}
+      />
 
     }
-    // let classes = ['red', "bold"].join(' ');
-    const assignedClasses = [];
-    if (this.state.persons.length <= 2) {
-      assignedClasses.push(classes.red) //  classses = ['red']
-    }
-    if (this.state.persons.length <= 1){
-      assignedClasses.push(classes.bold) // classes = ['red, 'bold']
-    }
+
 
     return (
       <div className={classes.App}>
-        <h1>Hi, I am a new React App</h1>
-        <p className={assignedClasses.join (' ')}>This is really working</p>
-        <button className={btnClass}
-          onClick={this.togglePersonsHandler}>
-          Toggle Person{" "}
-        </button>
+        <Cockpit
+          appTitle={this.props.title}
+          showPersons={this.state.showPersons}
+          persons={this.state.persons}
+          clicked={this.togglePersonsHandler} />
         {persons}
       </div>
-  );
+    );
     // return React.createElement("div", null, "h1", "Hi, I'm a React!!");
     // return React.createElement(
     //   "div",
