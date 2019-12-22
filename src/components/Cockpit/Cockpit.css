@@ -16,12 +16,12 @@
   .bold {
     font-weight: bold;
   }
-  .Cockpit, div {
+  .Button, div {
     display: flex;
     justify-content: center;
   }
   
-  .Cockpit button {
+  .Button {
     color: white;
     font: inherit;
     width: 200px;
@@ -36,16 +36,16 @@
     flex-direction: column;
   }
   
-  .Cockpit button:hover {
+  .Button:hover {
     background-color: yellow;
     color: black;
   }
   
-  .Cockpit button.Red {
+  .Button.Red {
     background-Color: red;
   }
   
-  .Cockpit button.Red:hover {
+  .Button.Red:hover {
     background-color: salmon;
     color: black;
   }
