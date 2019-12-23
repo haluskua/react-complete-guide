@@ -38,7 +38,8 @@ class App extends PureComponent {
     showPersons: false,
     showCockpit: true,
     changeCounter: 0,
-    authenticated: false
+    authenticated: false,
+    toggleClicked: 0
   };
 
   componentWillMount() {
@@ -111,7 +112,13 @@ class App extends PureComponent {
 
   togglePersonsHandler = () => {
     const doesShow = this.state.showPersons;
-    this.setState({ showPersons: !doesShow });
+    this.setState( (prevState, props) => {
+      return {
+        showPersons: !doesShow, 
+        toggleClicked: prevState.toggleClicked + 1 
+      }
+      
+    });
   };
 
   render() {
