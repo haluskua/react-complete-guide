@@ -10,6 +10,9 @@ import Auxiliary from "../hoc/Auxiliary";
 // import { join } from "path";
 // import withClass from "../hoc/WithClass";
 
+export const AuthContext = React.createContext(false);
+
+
 class App extends PureComponent {
   constructor(props) {
     super(props);
@@ -112,17 +115,17 @@ class App extends PureComponent {
 
   togglePersonsHandler = () => {
     const doesShow = this.state.showPersons;
-    this.setState( (prevState, props) => {
+    this.setState((prevState, props) => {
       return {
-        showPersons: !doesShow, 
-        toggleClicked: prevState.toggleClicked + 1 
+        showPersons: !doesShow,
+        toggleClicked: prevState.toggleClicked + 1
       }
-      
+
     });
   };
 
   loginHandler = () => {
-    this.setState({authenticated: true});
+    this.setState({ authenticated: true });
   }
 
   render() {
@@ -134,7 +137,6 @@ class App extends PureComponent {
         persons={this.state.persons}
         clicked={this.deletePersonHandler}
         changed={this.nameChangeHandler}
-        isAuthenticated={this.state.authenticated}
       />;
     }
     return (
@@ -145,8 +147,12 @@ class App extends PureComponent {
           appTitle={this.props.title}
           persons={this.state.persons}
           login={this.loginHandler}
-          clicked={this.togglePersonsHandler} />
-        {persons}
+          clicked={this.togglePersonsHandler}
+        />
+        <AuthContext.Provider value={this.state.authenticated}>
+          {persons}
+
+        </AuthContext.Provider>
       </Auxiliary>
     );
     // return React.createElement("div", null, "h1", "Hi, I'm a React!!");
