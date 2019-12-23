@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 
 // const withClass = props => (
 //   <div className={props.classes}>{props.children}</div>
@@ -19,16 +19,22 @@ import React, {Component} from "react";
 // When fetching API to confirm user ID etc you will use a stateful Component
 
 const withClass = (WrappedComponent, className) => {
-  return class extends Component {
-    render () {
+  const WithClass = class extends Component {
+    render() {
       return (
         <div className={className}>
-        <WrappedComponent {...this.props} />
-      </div>
+          <WrappedComponent ref={this.props.forwardedRef}  {...this.props} />
+        </div>
       )
     }
 
   }
-};
+
+  return React.forwardRef((props, ref) => {
+    return <WithClass {...props} forwardedRef={ref} />
+  });
+}
+
+
 
 export default withClass;
