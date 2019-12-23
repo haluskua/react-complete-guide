@@ -21,17 +21,17 @@ class App extends PureComponent {
       {
         id: "bnvbn",
         name: "Max",
-        age: 28
+        age: 28,
       },
       {
         id: "xcvxc",
         name: "Manu",
-        age: 29
+        age: 29,
       },
       {
         id: "wlkdd",
         name: "Stephanie",
-        age: 26
+        age: 26,
       }
     ],
     othersState: "some other value",
@@ -39,7 +39,7 @@ class App extends PureComponent {
     showCockpit: true,
     changeCounter: 0,
     authenticated: false,
-    toggleClicked: 0
+    toggleClicked: 0,
   };
 
   componentWillMount() {
