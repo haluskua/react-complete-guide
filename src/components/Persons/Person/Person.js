@@ -39,13 +39,16 @@ class Person extends Component {
   }
 
   focus() {
-      this.inputElement.current.focus();
+    this.inputElement.current.focus();
   }
 
   render() {
     console.log('[Person.js] Inside render');
     return (
       <Auxiliary>
+
+        {this.props.authenticated ? <p>I'm authenticated!</p> : null}
+
         <p onClick={this.props.click}> I'm {this.props.name} and I am {this.props.age} year old!</p>
         <p> {this.props.children}</p>
         <input
